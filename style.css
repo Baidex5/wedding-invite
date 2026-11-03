@@ -7,7 +7,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Полный экран для видео */
 .hero-section {
   position: relative;
   width: 100%;
@@ -31,7 +30,11 @@ body {
 .video-bg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* Вариант 1: покажет всё видео без обрезки (могут быть полосы) */
+  object-fit: contain;
+  /* Вариант 2: если нужно без полос — раскомментируйте строку ниже и подберите позицию */
+  /* object-fit: cover; */
+  /* object-position: 50% 60%; */
   display: block;
 }
 
