@@ -112,6 +112,80 @@ body {
   background: #fff;
 }
 
+/* --- АНИМАЦИЯ ПОЯВЛЕНИЯ (как на референсе) --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  opacity: 0; /* Сначала скрыто */
+  animation: fadeInUp 1s ease forwards; /* Плавно выезжает вверх */
+}
+
+/* --- КНОПКА МУЗЫКИ --- */
+.music-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ddd;
+  color: #1a1a1a;
+  padding: 12px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.music-btn:hover {
+  transform: scale(1.05);
+  background: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* АНИМАЦИЯ ПУЛЬСАЦИИ (когда музыка выключена) */
+.music-btn.inactive .icon {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Состояние ВКЛЮЧЕНО (когда музыка играет) */
+.music-btn.active {
+  background: #1a1a1a;
+  color: #fff;
+  border-color: #1a1a1a;
+}
+
+.music-btn.active .icon {
+  animation: none; /* Убираем пульсацию */
+  transform: scale(1.1);
+}
+
+/* СКРЫВАЕМ КНОПКУ НА МОБИЛЬНЫХ (чтобы не мешала) */
+@media (max-width: 768px) {
+  .music-btn {
+    display: none;
+  }
+}
+
 .intro-image {
   width: 100%;
   height: auto;
