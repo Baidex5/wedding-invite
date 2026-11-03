@@ -5,13 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Руслан & Алёна • Свадьба</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Фоновое видео (если нет файла — будет заглушка) -->
   <video autoplay muted loop playsinline class="bg-video">
     <source src="assets/ring-video.mp4" type="video/mp4" />
   </video>
+
+  <!-- Заглушка, если видео не загружено (для теста) -->
+  <div class="bg-placeholder"></div>
 
   <main class="container">
     <section class="hero">
@@ -30,12 +34,17 @@
       </ul>
     </section>
 
-    <section class="location fade-up delay-1">
+    <section class="dress-code fade-up delay-1">
+      <h2>Дресс‑код</h2>
+      <p>Элегантный стиль (Cocktail). Пастельные и нейтральные тона приветствуются.</p>
+    </section>
+
+    <section class="location fade-up delay-2">
       <h2>Место</h2>
       <p>Ресторан «Астория», зал «Золотой»<br>г. Москва, ул. Тверская, 1</p>
     </section>
 
-    <section class="rsvp fade-up delay-2">
+    <section class="rsvp fade-up delay-3">
       <h2>Подтвердите присутствие</h2>
       <form id="rsvp-form">
         <input type="text" placeholder="Ваше имя" required />
