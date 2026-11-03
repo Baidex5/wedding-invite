@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
   
   <style>
-    /* --- СБРОС --- */
+    /* --- БАЗА --- */
     body {
       margin: 0;
       padding: 0;
@@ -16,97 +16,15 @@
       color: #1a1a1a;
       background-color: #ffffff;
       overflow-x: hidden;
-      line-height: 1.6;
     }
 
-    /* --- HERO SECTION (ВИДЕО НА ВЕСЬ ЭКРАН) --- */
-    .hero-section {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .video-wrapper {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      overflow: hidden;
-    }
-
-    .video-bg {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: 50% 50%;
-      display: block;
-    }
-
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.35);
-      z-index: 2;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 3;
-      color: #fff;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-    }
-
-    .calligraphy {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-weight: 600;
-      font-size: clamp(3rem, 10vw, 5rem);
-      line-height: 1.1;
-      margin: 0;
-      color: #fff;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    }
-
-    .divider {
-      width: 100px;
-      height: 1px;
-      background: #fff;
-      margin: 20px auto;
-      opacity: 0;
-      animation: fadeIn 1s ease forwards 0.8s;
-    }
-
-    .date {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 500;
-      font-size: clamp(1.5rem, 4vw, 2rem);
-      letter-spacing: 4px;
-      color: #fff;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s ease forwards 1.2s;
-    }
-
-    /* --- ОСНОВНОЙ КОНТЕНТ --- */
     .container {
       max-width: 1100px;
       margin: 0 auto;
       padding: 60px 20px;
     }
 
-    /* --- БЛОК ПРИГЛАШЕНИЯ --- */
+    /* --- СЕТКА ДЛЯ ТЕКСТА И ФОТО --- */
     .intro-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -136,137 +54,48 @@
       margin: 0;
     }
 
-    /* --- ИСПРАВЛЕННАЯ АРКА (ГЛАВНОЕ ИЗМЕНЕНИЕ) --- */
-    .intro-image-wrapper {
+    /* --- ГЛАВНЫЙ БЛОК С АРКОЙ (ИСПРАВЛЕНО) --- */
+    .photo-wrapper {
       position: relative;
       width: 100%;
-      /* Убрали padding-top: 100%, чтобы не ломать пропорции фото */
-      overflow: hidden;
-      /* Скругление нижних углов для эстетики */
-      border-radius: 0 0 24px 24px; 
+      /* Важно: не задаем высоту, она будет по фото */
+      overflow: hidden; 
+      border-radius: 0 0 24px 24px; /* Скругление только низа */
       box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15);
       background: #fff;
-      /* Добавили внутренний отступ, чтобы clip-path не резал края фото */
-      padding: 10px; 
     }
 
-    .arch-image {
+    .photo-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      /* Фото целое, ничего не режем */
+    }
+
+    /* --- БЕЛАЯ АРКА (МАСКА) --- */
+    .arch-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      display: block;
-      object-fit: cover;
+      background-color: #fff;
+      z-index: 10;
       
-      /* НОВАЯ ФОРМА АРКИ */
-      /* Это SVG-путь, который создает плавную арку сверху */
-      clip-path: path('M0 0 L0 100% L100% 100% L100% 0 Q50% 25% 0 0 Z');
+      /* Магия: вырезаем дырку в белом фоне */
+      /* circle at top = центр круга сверху по центру */
+      /* transparent 45% = прозрачная часть (дырка) до 45% высоты */
+      /* black 55% = белая часть начинается после дырки */
+      -webkit-mask-image: radial-gradient(circle at top, transparent 45%, black 55%);
+      mask-image: radial-gradient(circle at top, transparent 45%, black 55%);
+      
+      /* Чтобы края были гладкими */
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
     }
 
-    /* --- ДРУГИЕ СЕКЦИИ --- */
-    section {
-      margin-bottom: 80px;
-    }
-
-    h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 40px;
-      color: #1a1a1a;
-      text-transform: none;
-      letter-spacing: 1px;
-    }
-
-    .program ul {
-      list-style: none;
-      padding: 0;
-      text-align: left;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .program li {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 15px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(26, 26, 26, 0.1);
-    }
-
-    .program span {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 500;
-      min-width: 80px;
-      color: #1a1a1a;
-    }
-
-    .dress-code p,
-    .location p {
-      text-align: center;
-      font-size: 1.1rem;
-      color: #333;
-    }
-
-    .rsvp form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      max-width: 450px;
-      margin: 0 auto;
-    }
-
-    .rsvp input {
-      padding: 16px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      background: #fff;
-      color: #1a1a1a;
-      font-family: inherit;
-      font-size: 1rem;
-      box-sizing: border-box;
-    }
-
-    .rsvp button {
-      padding: 16px;
-      border: none;
-      background: #1a1a1a;
-      color: #fff;
-      font-weight: 500;
-      cursor: pointer;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: background 0.3s;
-    }
-
-    .rsvp button:hover {
-      background: #333;
-    }
-
-    /* --- АНИМАЦИИ --- */
-    @keyframes fadeInUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    /* --- АДАПТИВНОСТЬ (ТЕЛЕФОНЫ) --- */
+    /* --- АДАПТИВНОСТЬ (ТЕЛЕФОН) --- */
     @media (max-width: 768px) {
-      .hero-section {
-        height: 100vh;
-      }
-
-      .calligraphy {
-        font-size: 2.5rem;
-      }
-
-      .date {
-        font-size: 1.5rem;
-      }
-
       .intro-content {
         grid-template-columns: 1fr;
         text-align: center;
@@ -277,46 +106,18 @@
         font-size: 2rem;
       }
 
-      /* На телефоне делаем арку более круглой, чтобы лица точно влезли */
-      .intro-image-wrapper {
-        padding: 5px;
-        margin-top: 20px;
-      }
-
-      .arch-image {
-        /* Более круглая арка для мобильных */
-        clip-path: path('M0 0 L0 100% L100% 100% L100% 0 Q50% 35% 0 0 Z');
-      }
-
-      .container {
-        padding: 40px 20px;
-      }
-      
-      h2 {
-        font-size: 2rem;
+      /* На телефоне делаем арку чуть больше, чтобы головы точно влезли */
+      .arch-mask {
+        -webkit-mask-image: radial-gradient(circle at top, transparent 50%, black 60%);
+        mask-image: radial-gradient(circle at top, transparent 50%, black 60%);
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- 1. ВИДЕО НА ВЕСЬ ЭКРАН -->
-  <section class="hero-section">
-    <div class="video-wrapper">
-      <!-- Путь к видео: assets/ring-video.mp4 -->
-      <video src="assets/ring-video.mp4" class="video-bg" autoplay muted loop playsinline></video>
-    </div>
-    <div class="overlay"></div>
-    <div class="hero-content">
-      <h1 class="calligraphy">Руслан & Алёна</h1>
-      <div class="divider"></div>
-      <p class="date">08 / 09 / 27</p>
-    </div>
-  </section>
-
   <main class="container">
     
-    <!-- 2. БЛОК С ТЕКСТОМ И АРКОЙ -->
     <section class="intro">
       <div class="intro-content">
         <div class="intro-text">
@@ -327,53 +128,18 @@
           </p>
         </div>
         
-        <div class="intro-image-wrapper">
+        <!-- Блок с фото и маской -->
+        <div class="photo-wrapper">
           <!-- Путь к фото: assets/arch-photo.jpg -->
-          <img src="assets/arch-photo.jpg" alt="Фото пары в арке" class="arch-image" loading="lazy">
+          <img src="assets/arch-photo.jpg" alt="Пара в арке" loading="lazy">
+          
+          <!-- Белая маска с вырезом -->
+          <div class="arch-mask"></div>
         </div>
       </div>
     </section>
 
-    <!-- 3. ПРОГРАММА ДНЯ -->
-    <section class="program">
-      <h2>Программа дня</h2>
-      <ul>
-        <li><span>14:00</span> Сбор гостей</li>
-        <li><span>15:00</span> Церемония</li>
-        <li><span>17:00</span> Банкет</li>
-        <li><span>21:00</span> Первый танец</li>
-      </ul>
-    </section>
-
-    <!-- 4. ДРЕСС-КОД -->
-    <section class="dress-code">
-      <h2>Дресс‑код</h2>
-      <p>Элегантный стиль (Cocktail). Пастельные и нейтральные тона приветствуются.</p>
-    </section>
-
-    <!-- 5. МЕСТО -->
-    <section class="location">
-      <h2>Место</h2>
-      <p>Ресторан «Астория», зал «Золотой»<br>г. Москва, ул. Тверская, 1</p>
-    </section>
-
-    <!-- 6. RSVP -->
-    <section class="rsvp">
-      <h2>Подтвердите присутствие</h2>
-      <form id="rsvp-form">
-        <input type="text" placeholder="Ваше имя" required />
-        <input type="email" placeholder="Email" required />
-        <button type="submit">Отправить</button>
-      </form>
-    </section>
-
   </main>
 
-  <script>
-    document.getElementById('rsvp-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Спасибо! Ваше подтверждение получено.');
-    });
-  </script>
 </body>
 </html>
