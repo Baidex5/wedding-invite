@@ -3,48 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Свадебное приглашение</title>
+  <title>Руслан & Алёна • Свадьба</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Фоновое видео (без звука по правилам браузеров) -->
   <video autoplay muted loop playsinline class="bg-video">
-    <source src="assets/video.mp4" type="video/mp4" />
-    Твой браузер не поддерживает видео.
+    <source src="assets/ring-video.mp4" type="video/mp4" />
   </video>
 
   <main class="container">
     <section class="hero">
-      <h1 class="fade-in">Приглашаем на нашу свадьбу</h1>
-      <p class="subtitle fade-in delay-1">Анна & Михаил • 12 октября 2026</p>
-      <button id="play-music-btn" class="btn fade-in delay-2">🎵 Включить музыку</button>
+      <h1 class="calligraphy">Руслан & Алёна</h1>
+      <div class="divider"></div>
+      <p class="date">08 / 09 / 27</p>
     </section>
 
-    <section class="story fade-up">
-      <h2>Наша история</h2>
-      <p>Здесь будет трогательный текст про знакомство, первое свидание и предложение.</p>
-    </section>
-
-    <section class="program fade-up delay-1">
+    <section class="program fade-up">
       <h2>Программа дня</h2>
       <ul>
-        <li>14:00 — Сбор гостей</li>
-        <li>15:00 — Церемония</li>
-        <li>17:00 — Банкет</li>
+        <li><span>14:00</span> Сбор гостей</li>
+        <li><span>15:00</span> Церемония</li>
+        <li><span>17:00</span> Банкет</li>
+        <li><span>21:00</span> Первый танец</li>
       </ul>
+    </section>
+
+    <section class="location fade-up delay-1">
+      <h2>Место</h2>
+      <p>Ресторан «Астория», зал «Золотой»<br>г. Москва, ул. Тверская, 1</p>
+    </section>
+
+    <section class="rsvp fade-up delay-2">
+      <h2>Подтвердите присутствие</h2>
+      <form id="rsvp-form">
+        <input type="text" placeholder="Ваше имя" required />
+        <input type="email" placeholder="Email" required />
+        <button type="submit">Отправить</button>
+      </form>
     </section>
   </main>
 
-  <audio id="wedding-music" loop preload="auto"></audio>
   <script src="script.js"></script>
 </body>
 </html>
-<video autoplay muted loop playsinline class="bg-video">
-  <source src="assets/ring-video.mp4" type="video/mp4" />
-</video>
-
-<div class="overlay">
-  <h1 class="calligraphy">Руслан & Алёна</h1>
-  <div class="divider"></div>
-  <p class="date">08 / 09 / 27</p>
-</div>
