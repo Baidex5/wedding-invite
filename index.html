@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Свадебное приглашение</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Фоновое видео (без звука по правилам браузеров) -->
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="assets/video.mp4" type="video/mp4" />
+    Твой браузер не поддерживает видео.
+  </video>
+
+  <main class="container">
+    <section class="hero">
+      <h1 class="fade-in">Приглашаем на нашу свадьбу</h1>
+      <p class="subtitle fade-in delay-1">Анна & Михаил • 12 октября 2026</p>
+      <button id="play-music-btn" class="btn fade-in delay-2">🎵 Включить музыку</button>
+    </section>
+
+    <section class="story fade-up">
+      <h2>Наша история</h2>
+      <p>Здесь будет трогательный текст про знакомство, первое свидание и предложение.</p>
+    </section>
+
+    <section class="program fade-up delay-1">
+      <h2>Программа дня</h2>
+      <ul>
+        <li>14:00 — Сбор гостей</li>
+        <li>15:00 — Церемония</li>
+        <li>17:00 — Банкет</li>
+      </ul>
+    </section>
+  </main>
+
+  <audio id="wedding-music" loop preload="auto"></audio>
+  <script src="script.js"></script>
+</body>
+</html>
