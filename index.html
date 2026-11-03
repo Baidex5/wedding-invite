@@ -4,12 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Руслан & Алёна • Свадьба</title>
-  <!-- Подключаем шрифты -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
   
   <style>
-    /* --- СБРОС И БАЗА --- */
+    /* --- СБРОС --- */
     body {
       margin: 0;
       padding: 0;
@@ -20,16 +19,16 @@
       line-height: 1.6;
     }
 
-    /* --- ВИДЕО БЛОК (ОТДЕЛЬНЫЙ, НЕ ФОН) --- */
-    .video-section {
-      width: 100%;
-      height: 60vh; /* Высота видео - 60% от экрана */
+    /* --- HERO SECTION (ВИДЕО НА ВЕСЬ ЭКРАН ПРИ ЗАХОДЕ) --- */
+    .hero-section {
       position: relative;
+      width: 100%;
+      height: 100vh; /* Высота на весь экран */
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #000;
+      text-align: center;
     }
 
     .video-wrapper {
@@ -39,34 +38,33 @@
       width: 100%;
       height: 100%;
       z-index: 1;
+      overflow: hidden;
     }
 
     .video-bg {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover; /* Видео заполняет экран, ничего не обрезая */
       object-position: 50% 50%;
       display: block;
     }
 
-    /* Затемнение поверх видео для читаемости текста */
-    .video-overlay {
+    /* Затемнение для читаемости белого текста */
+    .overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.35);
       z-index: 2;
     }
 
-    .video-content {
+    .hero-content {
       position: relative;
       z-index: 3;
-      text-align: center;
       color: #fff;
-      max-width: 800px;
-      padding: 0 20px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
     }
 
     .calligraphy {
@@ -139,14 +137,14 @@
       margin: 0;
     }
 
-    /* --- ФОРМА АРКИ (САМОЕ ВАЖНОЕ) --- */
+    /* --- ФОРМА АРКИ (CLIP-PATH) --- */
     .intro-image-wrapper {
       position: relative;
       width: 100%;
-      /* Квадратный блок для правильной формы арки */
+      /* Квадратный контейнер для правильной пропорции арки */
       padding-top: 100%; 
       overflow: hidden;
-      /* Нижние углы чуть скруглены для эстетики */
+      /* Нижние углы чуть скругляем */
       border-radius: 0 0 20px 20px; 
       box-shadow: 0 30px 50px rgba(0, 0, 0, 0.2);
       background: #fff; 
@@ -159,7 +157,7 @@
       width: 100%;
       height: 100%;
       
-      /* ФОРМА АРКИ: Эллипс, обрезанный сверху */
+      /* ФОРМА АРКИ: Эллипс */
       /* 50% ширина, 55% высота, центр сверху по центру */
       clip-path: ellipse(50% 55% at 50% 0%);
       
@@ -261,8 +259,8 @@
 
     /* --- АДАПТИВНОСТЬ (ТЕЛЕФОНЫ) --- */
     @media (max-width: 768px) {
-      .video-section {
-        height: 40vh; /* На телефоне видео чуть меньше */
+      .hero-section {
+        height: 100vh; /* На телефоне тоже на весь экран */
       }
 
       .calligraphy {
@@ -283,7 +281,7 @@
         font-size: 2rem;
       }
 
-      /* На телефоне арка чуть ниже, чтобы лица не обрезались */
+      /* На телефоне арка чуть ниже, чтобы не обрезать лица */
       .intro-image-wrapper {
         padding-top: 70%; /* Более компактная арка */
         margin-top: 30px;
@@ -307,14 +305,14 @@
 </head>
 <body>
 
-  <!-- 1. ВИДЕО БЛОК (ОТДЕЛЬНЫЙ, НЕ ФОН) -->
-  <section class="video-section">
+  <!-- 1. ВИДЕО НА ВЕСЬ ЭКРАН (ПРИ ЗАХОДЕ) -->
+  <section class="hero-section">
     <div class="video-wrapper">
       <!-- ВАЖНО: Путь к видео должен совпадать с реальным расположением файла -->
       <video src="assets/ring-video.mp4" class="video-bg" autoplay muted loop playsinline></video>
     </div>
-    <div class="video-overlay"></div>
-    <div class="video-content">
+    <div class="overlay"></div>
+    <div class="hero-content">
       <h1 class="calligraphy">Руслан & Алёна</h1>
       <div class="divider"></div>
       <p class="date">08 / 09 / 27</p>
@@ -323,7 +321,7 @@
 
   <main class="container">
     
-    <!-- 2. БЛОК С ТЕКСТОМ И АРКОЙ -->
+    <!-- 2. БЛОК С ТЕКСТОМ И АРКОЙ (ПОЯВЛЯЕТСЯ ПРИ ПРОКРУТКЕ) -->
     <section class="intro">
       <div class="intro-content">
         <div class="intro-text">
