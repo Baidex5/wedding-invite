@@ -9,61 +9,104 @@ body {
   line-height: 1.6;
 }
 
-/* --- КОНТЕЙНЕР --- */
-.container {
-  max-width: 1400px; /* Чуть шире, чтобы фото было большим */
-  margin: 0 auto;
-  padding: 0 20px;
+/* --- СЕКЦИЯ С НАЗВАНИЕМ (ВМЕСТО ВИДЕО) --- */
+.hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #f9f9f9;
+  padding: 20px;
 }
 
-/* --- ГЛАВНАЯ СЕТКА (ТЕКСТ СЛЕВА УЗКОЙ КОЛОНКОЙ, ФОТО СПРАВА) --- */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #1a1a1a;
+}
+
+.calligraphy {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(3rem, 10vw, 5rem);
+  line-height: 1.1;
+  margin: 0;
+  color: #1a1a1a;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.divider {
+  width: 100px;
+  height: 1px;
+  background: #1a1a1a;
+  margin: 20px auto;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards 0.8s;
+}
+
+.date {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  letter-spacing: 4px;
+  color: #1a1a1a;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards 1.2s;
+}
+
+/* --- ОСНОВНОЙ КОНТЕНТ --- */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* --- БЛОК: ТЕКСТ + ФОТО-АРКА --- */
 .intro-content {
   display: grid;
-  /* Магия здесь: слева фиксированная ширина (или пропорция), справа всё остальное */
-  grid-template-columns: 280px 1fr; 
+  grid-template-columns: 1fr 1fr;
   gap: 40px;
-  align-items: center; /* Центрирует текст по вертикали относительно фото */
-  min-height: 100vh; /* Растягивает секцию на всю высоту экрана */
-  padding: 60px 0;
+  align-items: center;
 }
 
-/* --- ТЕКСТ (ЛЕВАЯ КОЛОНКА) --- */
 .intro-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /* Текст прижимаем к верху или центру, как нужно */
-  text-align: left; 
-  padding-right: 20px; /* Отступ от границы колонки */
+  text-align: left;
 }
 
 .calligraphy-small {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-weight: 600;
-  font-size: 2.5rem; /* Чуть меньше, чтобы влезло в узкую колонку */
+  font-size: 3rem;
   line-height: 1.1;
   margin: 0 0 20px 0;
   color: #1a1a1a;
-  /* Если хочешь вертикальный текст, как на некоторых макетах, раскомментируй ниже: */
-  /* writing-mode: vertical-rl; */
 }
 
 .intro-message {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.6;
   color: #333;
   margin: 0;
 }
 
-/* --- ФОТО (ПРАВАЯ КОЛОНКА) --- */
+/* --- ИСПРАВЛЕННАЯ АРКА (БЕЗ clip-path) --- */
 .intro-image-wrapper {
   position: relative;
   width: 100%;
-  height: 100%;
   overflow: hidden;
-  /* Арка: верх полукруг, низ прямой */
+  /* ГЛАВНОЕ ИСПРАВЛЕНИЕ:
+     Горизонтальный радиус: 50% 50% (полукруг по ширине)
+     Вертикальный радиус: 40% 40% (высота купола)
+     Низ: 0 0 (прямой срез, как на фото) */
   border-radius: 50% 50% 0 0 / 40% 40% 0 0;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   background: #fff;
@@ -71,46 +114,131 @@ body {
 
 .intro-image {
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* ВАЖНО: cover заполнит блок, не сплющивая фото */
+  height: auto;
   display: block;
+  object-fit: cover;
+  /* clip-path удален! */
+}
+/* ---------------------------------- */
+
+/* --- ДРУГИЕ СЕКЦИИ --- */
+section {
+  margin-bottom: 60px;
+}
+
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 24px;
+  color: #1a1a1a;
+  text-transform: none;
+  letter-spacing: 1px;
+}
+
+.program ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.program li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+}
+
+.program span {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  min-width: 80px;
+  color: #1a1a1a;
+}
+
+.dress-code p,
+.location p {
+  text-align: center;
+  line-height: 1.6;
+  color: #333;
+}
+
+.rsvp form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.rsvp input {
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  color: #1a1a1a;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.rsvp button {
+  padding: 14px;
+  border: none;
+  background: #1a1a1a;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background 0.3s;
+}
+
+.rsvp button:hover {
+  background: #333;
+}
+
+/* --- АНИМАЦИИ --- */
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
 }
 
 /* --- АДАПТИВНОСТЬ (МОБИЛЬНЫЕ) --- */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 80vh;
+    padding: 40px 20px;
+  }
+
+  .calligraphy {
+    font-size: 2.5rem;
+  }
+
+  .date {
+    font-size: 1.5rem;
+  }
+
   .intro-content {
-    /* На планшетах можно оставить две колонки, но уже 1fr 1fr */
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    text-align: center;
     gap: 30px;
   }
-  
+
   .calligraphy-small {
     font-size: 2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .intro-content {
-    /* На телефоне — одна колонка друг под другом */
-    grid-template-columns: 1fr;
-    flex-direction: column;
-    align-items: center;
     text-align: center;
-    min-height: auto;
-    padding: 40px 0;
   }
 
-  .intro-text {
-    padding-right: 0;
-    margin-bottom: 40px;
-  }
-
-  .calligraphy-small {
-    font-size: 2rem;
-  }
-
-  /* На мобильном арка чуть выше, чтобы не резать лица */
+  /* На мобильном делаем арку чуть выше (45%), чтобы не задеть головы */
   .intro-image-wrapper {
+    margin-top: 20px;
     border-radius: 50% 50% 0 0 / 45% 45% 0 0;
   }
 }
