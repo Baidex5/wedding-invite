@@ -9,22 +9,39 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Фоновое видео (если нет файла — будет заглушка) -->
+  <!-- Фоновое видео (только для первого экрана) -->
   <video autoplay muted loop playsinline class="bg-video">
     <source src="assets/ring-video.mp4" type="video/mp4" />
   </video>
 
-  <!-- Заглушка, если видео не загружено (для теста) -->
+  <!-- Заглушка, если видео нет -->
   <div class="bg-placeholder"></div>
 
   <main class="container">
+    <!-- Блок как на скриншоте (каллиграфия + фото) -->
+    <section class="intro fade-up">
+      <div class="intro-content">
+        <div class="intro-text">
+          <p class="calligraphy-small">Я люблю тебя<br>больше чем<br>вчера</p>
+          <p class="intro-message">
+            Это официальное приглашение на нашу свадьбу!<br>
+            А получили вы его потому, что мы очень хотим видеть вас в этот день рядом с нами :)
+          </p>
+        </div>
+        <div class="intro-image">
+          <!-- Сюда можно вставить фото пары, если есть -->
+          <div class="photo-placeholder"></div>
+        </div>
+      </div>
+    </section>
+
     <section class="hero">
       <h1 class="calligraphy">Руслан & Алёна</h1>
       <div class="divider"></div>
       <p class="date">08 / 09 / 27</p>
     </section>
 
-    <section class="program fade-up">
+    <section class="program fade-up delay-1">
       <h2>Программа дня</h2>
       <ul>
         <li><span>14:00</span> Сбор гостей</li>
@@ -34,17 +51,17 @@
       </ul>
     </section>
 
-    <section class="dress-code fade-up delay-1">
+    <section class="dress-code fade-up delay-2">
       <h2>Дресс‑код</h2>
       <p>Элегантный стиль (Cocktail). Пастельные и нейтральные тона приветствуются.</p>
     </section>
 
-    <section class="location fade-up delay-2">
+    <section class="location fade-up delay-3">
       <h2>Место</h2>
       <p>Ресторан «Астория», зал «Золотой»<br>г. Москва, ул. Тверская, 1</p>
     </section>
 
-    <section class="rsvp fade-up delay-3">
+    <section class="rsvp fade-up delay-4">
       <h2>Подтвердите присутствие</h2>
       <form id="rsvp-form">
         <input type="text" placeholder="Ваше имя" required />
