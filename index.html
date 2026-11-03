@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Первый экран: видео + текст -->
+  <!-- Первый экран: видео на полный экран -->
   <section class="hero-section">
     <div class="video-wrapper">
       <video autoplay muted loop playsinline class="video-bg">
@@ -24,9 +24,9 @@
     </div>
   </section>
 
-  <!-- Второй экран: белый фон + арка -->
-  <section class="white-section">
-    <div class="container">
+  <main class="container">
+    <!-- Блок с текстом (вместо фото арки) -->
+    <section class="intro fade-up">
       <div class="intro-content">
         <div class="intro-text">
           <p class="calligraphy-small">Я люблю тебя<br>больше чем<br>вчера</p>
@@ -35,14 +35,10 @@
             А получили вы его потому, что мы очень хотим видеть вас в этот день рядом с нами :)
           </p>
         </div>
-        <div class="intro-image">
-          <img src="assets/arch-photo.jpg" alt="Пара в арке" class="arch-img" />
-        </div>
+        <!-- Убрали блок с фото арки -->
       </div>
-    </div>
-  </section>
+    </section>
 
-  <main class="container">
     <section class="program fade-up delay-1">
       <h2>Программа дня</h2>
       <ul>
