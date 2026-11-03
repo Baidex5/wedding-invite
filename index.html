@@ -19,11 +19,11 @@
       line-height: 1.6;
     }
 
-    /* --- HERO SECTION (ВИДЕО НА ВЕСЬ ЭКРАН ПРИ ЗАХОДЕ) --- */
+    /* --- HERO SECTION (ВИДЕО НА ВЕСЬ ЭКРАН) --- */
     .hero-section {
       position: relative;
       width: 100%;
-      height: 100vh; /* Высота на весь экран */
+      height: 100vh;
       overflow: hidden;
       display: flex;
       justify-content: center;
@@ -44,12 +44,11 @@
     .video-bg {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Видео заполняет экран, ничего не обрезая */
+      object-fit: cover;
       object-position: 50% 50%;
       display: block;
     }
 
-    /* Затемнение для читаемости белого текста */
     .overlay {
       position: absolute;
       top: 0;
@@ -107,7 +106,7 @@
       padding: 60px 20px;
     }
 
-    /* --- БЛОК ПРИГЛАШЕНИЯ (ТЕКСТ + АРКА) --- */
+    /* --- БЛОК ПРИГЛАШЕНИЯ --- */
     .intro-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -137,32 +136,29 @@
       margin: 0;
     }
 
-    /* --- ФОРМА АРКИ (CLIP-PATH) --- */
+    /* --- ИСПРАВЛЕННАЯ АРКА (ГЛАВНОЕ ИЗМЕНЕНИЕ) --- */
     .intro-image-wrapper {
       position: relative;
       width: 100%;
-      /* Квадратный контейнер для правильной пропорции арки */
-      padding-top: 100%; 
+      /* Убрали padding-top: 100%, чтобы не ломать пропорции фото */
       overflow: hidden;
-      /* Нижние углы чуть скругляем */
-      border-radius: 0 0 20px 20px; 
-      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.2);
-      background: #fff; 
+      /* Скругление нижних углов для эстетики */
+      border-radius: 0 0 24px 24px; 
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15);
+      background: #fff;
+      /* Добавили внутренний отступ, чтобы clip-path не резал края фото */
+      padding: 10px; 
     }
 
     .arch-image {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
-      
-      /* ФОРМА АРКИ: Эллипс */
-      /* 50% ширина, 55% высота, центр сверху по центру */
-      clip-path: ellipse(50% 55% at 50% 0%);
-      
-      object-fit: cover;
       display: block;
+      object-fit: cover;
+      
+      /* НОВАЯ ФОРМА АРКИ */
+      /* Это SVG-путь, который создает плавную арку сверху */
+      clip-path: path('M0 0 L0 100% L100% 100% L100% 0 Q50% 25% 0 0 Z');
     }
 
     /* --- ДРУГИЕ СЕКЦИИ --- */
@@ -260,7 +256,7 @@
     /* --- АДАПТИВНОСТЬ (ТЕЛЕФОНЫ) --- */
     @media (max-width: 768px) {
       .hero-section {
-        height: 100vh; /* На телефоне тоже на весь экран */
+        height: 100vh;
       }
 
       .calligraphy {
@@ -281,16 +277,15 @@
         font-size: 2rem;
       }
 
-      /* На телефоне арка чуть ниже, чтобы не обрезать лица */
+      /* На телефоне делаем арку более круглой, чтобы лица точно влезли */
       .intro-image-wrapper {
-        padding-top: 70%; /* Более компактная арка */
-        margin-top: 30px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        padding: 5px;
+        margin-top: 20px;
       }
 
       .arch-image {
-        /* Чуть более круглая арка на мобильном */
-        clip-path: ellipse(50% 50% at 50% 0%);
+        /* Более круглая арка для мобильных */
+        clip-path: path('M0 0 L0 100% L100% 100% L100% 0 Q50% 35% 0 0 Z');
       }
 
       .container {
@@ -305,10 +300,10 @@
 </head>
 <body>
 
-  <!-- 1. ВИДЕО НА ВЕСЬ ЭКРАН (ПРИ ЗАХОДЕ) -->
+  <!-- 1. ВИДЕО НА ВЕСЬ ЭКРАН -->
   <section class="hero-section">
     <div class="video-wrapper">
-      <!-- ВАЖНО: Путь к видео должен совпадать с реальным расположением файла -->
+      <!-- Путь к видео: assets/ring-video.mp4 -->
       <video src="assets/ring-video.mp4" class="video-bg" autoplay muted loop playsinline></video>
     </div>
     <div class="overlay"></div>
@@ -321,7 +316,7 @@
 
   <main class="container">
     
-    <!-- 2. БЛОК С ТЕКСТОМ И АРКОЙ (ПОЯВЛЯЕТСЯ ПРИ ПРОКРУТКЕ) -->
+    <!-- 2. БЛОК С ТЕКСТОМ И АРКОЙ -->
     <section class="intro">
       <div class="intro-content">
         <div class="intro-text">
@@ -333,7 +328,7 @@
         </div>
         
         <div class="intro-image-wrapper">
-          <!-- ВАЖНО: Путь к фото должен совпадать с реальным расположением файла -->
+          <!-- Путь к фото: assets/arch-photo.jpg -->
           <img src="assets/arch-photo.jpg" alt="Фото пары в арке" class="arch-image" loading="lazy">
         </div>
       </div>
@@ -375,7 +370,6 @@
   </main>
 
   <script>
-    // Простой скрипт для отправки формы (заглушка)
     document.getElementById('rsvp-form').addEventListener('submit', function(e) {
       e.preventDefault();
       alert('Спасибо! Ваше подтверждение получено.');
