@@ -1,3 +1,4 @@
+/* --- БАЗА --- */
 body {
   margin: 0;
   padding: 0;
@@ -5,84 +6,27 @@ body {
   color: #1a1a1a;
   background-color: #ffffff;
   overflow-x: hidden;
+  line-height: 1.6;
 }
 
+/* --- СЕКЦИЯ С НАЗВАНИЕМ (ВМЕСТО ВИДЕО) --- */
 .hero-section {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: #f9f9f9; /* Заменили видео на нейтральный фон */
+  background-color: #f9f9f9;
+  padding: 20px;
 }
-
-/* Убрали стили для video-wrapper, video-bg, overlay — они не нужны без видео */
 
 .hero-content {
   position: relative;
   z-index: 2;
   color: #1a1a1a;
-  /* Убрали text-shadow, т.к. фон теперь светлый */
 }
-
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}
-
-/* Стили для блока с текстом и фото арки */
-.intro-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-}
-
-.intro-text {
-  text-align: left;
-}
-
-.calligraphy-small {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-weight: 600;
-  font-size: 3rem;
-  line-height: 1.1;
-  margin: 0 0 20px 0;
-  color: #1a1a1a;
-}
-
-.intro-message {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #333;
-  margin: 0;
-}
-
-/* --- ИСПРАВЛЕННЫЙ БЛОК ДЛЯ АРКИ --- */
-.intro-image-wrapper {
-  position: relative;
-  width: 100%;
-  /* УБРАЛИ padding-top: 100% — теперь высота по фото, ничего не сплющится */
-  overflow: hidden;
-  border-radius: 0 0 16px 16px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-.intro-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  /* Арка: эллипс, который закрывает верх, но не трогает лица */
-  clip-path: ellipse(50% 55% at 50% 0%);
-}
-/* ---------------------------------- */
 
 .calligraphy {
   font-family: 'Cormorant Garamond', serif;
@@ -117,6 +61,67 @@ body {
   animation: fadeInUp 1s ease forwards 1.2s;
 }
 
+/* --- ОСНОВНОЙ КОНТЕНТ --- */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* --- БЛОК: ТЕКСТ + ФОТО-АРКА --- */
+.intro-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.intro-text {
+  text-align: left;
+}
+
+.calligraphy-small {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 3rem;
+  line-height: 1.1;
+  margin: 0 0 20px 0;
+  color: #1a1a1a;
+}
+
+.intro-message {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+}
+
+/* --- ИСПРАВЛЕННАЯ АРКА (БЕЗ clip-path) --- */
+.intro-image-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  /* ГЛАВНОЕ ИСПРАВЛЕНИЕ:
+     Горизонтальный радиус: 50% 50% (полукруг по ширине)
+     Вертикальный радиус: 40% 40% (высота купола)
+     Низ: 0 0 (прямой срез, как на фото) */
+  border-radius: 50% 50% 0 0 / 40% 40% 0 0;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  background: #fff;
+}
+
+.intro-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  /* clip-path удален! */
+}
+/* ---------------------------------- */
+
+/* --- ДРУГИЕ СЕКЦИИ --- */
 section {
   margin-bottom: 60px;
 }
@@ -189,19 +194,14 @@ h2 {
   border-radius: 4px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  transition: background 0.3s;
 }
 
-.fade-up {
-  opacity: 0;
-  transform: translateY(40px);
-  animation: fadeIn 1s forwards;
+.rsvp button:hover {
+  background: #333;
 }
 
-.delay-1 { animation-delay: 0.4s; }
-.delay-2 { animation-delay: 0.8s; }
-.delay-3 { animation-delay: 1.2s; }
-.delay-4 { animation-delay: 1.6s; }
-
+/* --- АНИМАЦИИ --- */
 @keyframes fadeInUp {
   to { opacity: 1; transform: translateY(0); }
 }
@@ -210,38 +210,35 @@ h2 {
   to { opacity: 1; }
 }
 
+/* --- АДАПТИВНОСТЬ (МОБИЛЬНЫЕ) --- */
 @media (max-width: 768px) {
+  .hero-section {
+    min-height: 80vh;
+    padding: 40px 20px;
+  }
+
+  .calligraphy {
+    font-size: 2.5rem;
+  }
+
+  .date {
+    font-size: 1.5rem;
+  }
+
   .intro-content {
     grid-template-columns: 1fr;
     text-align: center;
+    gap: 30px;
   }
-  
+
   .calligraphy-small {
     font-size: 2rem;
     text-align: center;
   }
 
-  .hero-section {
-    min-height: 80vh;
-  }
-  
-  .calligraphy {
-    font-size: 2.5rem;
-  }
-  
-  .date {
-    font-size: 1.5rem;
-  }
-
-  /* Адаптив для арки на телефоне */
+  /* На мобильном делаем арку чуть выше (45%), чтобы не задеть головы */
   .intro-image-wrapper {
-    margin-top: 30px;
-    padding-top: 70%; /* Чуть ниже, чтобы не обрезать лица */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
-  }
-
-  .intro-image {
-    /* Чуть более круглая арка на мобильном */
-    clip-path: ellipse(50% 50% at 50% 0%);
+    margin-top: 20px;
+    border-radius: 50% 50% 0 0 / 45% 45% 0 0;
   }
 }
