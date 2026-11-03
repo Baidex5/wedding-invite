@@ -9,70 +9,59 @@ body {
   line-height: 1.6;
 }
 
-/* --- ШАПКА (ИМЯ ПАРЫ) --- */
-.hero-section {
-  width: 100%;
-  min-height: 80vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: #f9f9f9;
-  padding: 20px;
-}
-
-.hero-content h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-weight: 600;
-  font-size: clamp(3rem, 10vw, 5rem);
-  color: #1a1a1a;
-  margin: 0;
-}
-
-/* --- ОСНОВНОЙ КОНТЕЙНЕР --- */
+/* --- КОНТЕЙНЕР --- */
 .container {
-  max-width: 1100px;
+  max-width: 1400px; /* Чуть шире, чтобы фото было большим */
   margin: 0 auto;
-  padding: 60px 20px;
+  padding: 0 20px;
 }
 
-/* --- СЕТКА: ТЕКСТ СЛЕВА, ФОТО СПРАВА --- */
+/* --- ГЛАВНАЯ СЕТКА (ТЕКСТ СЛЕВА УЗКОЙ КОЛОНКОЙ, ФОТО СПРАВА) --- */
 .intro-content {
   display: grid;
-  /* 1fr 1fr = две равные колонки. Текст в первой, фото во второй */
-  grid-template-columns: 1fr 1fr; 
-  gap: 60px; /* Расстояние между текстом и фото */
-  align-items: center; /* Центрирует контент по вертикали */
+  /* Магия здесь: слева фиксированная ширина (или пропорция), справа всё остальное */
+  grid-template-columns: 280px 1fr; 
+  gap: 40px;
+  align-items: center; /* Центрирует текст по вертикали относительно фото */
+  min-height: 100vh; /* Растягивает секцию на всю высоту экрана */
+  padding: 60px 0;
 }
 
-/* --- ТЕКСТОВАЯ ЧАСТЬ (СЛЕВА) --- */
+/* --- ТЕКСТ (ЛЕВАЯ КОЛОНКА) --- */
 .intro-text {
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Текст прижимаем к верху или центру, как нужно */
+  text-align: left; 
+  padding-right: 20px; /* Отступ от границы колонки */
 }
 
 .calligraphy-small {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-weight: 600;
-  font-size: 3rem;
+  font-size: 2.5rem; /* Чуть меньше, чтобы влезло в узкую колонку */
   line-height: 1.1;
   margin: 0 0 20px 0;
   color: #1a1a1a;
+  /* Если хочешь вертикальный текст, как на некоторых макетах, раскомментируй ниже: */
+  /* writing-mode: vertical-rl; */
 }
 
 .intro-message {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  line-height: 1.5;
   color: #333;
   margin: 0;
 }
 
-/* --- ФОТО С АРКОЙ (СПРАВА) --- */
+/* --- ФОТО (ПРАВАЯ КОЛОНКА) --- */
 .intro-image-wrapper {
   position: relative;
   width: 100%;
+  height: 100%;
   overflow: hidden;
   /* Арка: верх полукруг, низ прямой */
   border-radius: 50% 50% 0 0 / 40% 40% 0 0;
@@ -82,76 +71,46 @@ body {
 
 .intro-image {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover; /* ВАЖНО: cover заполнит блок, не сплющивая фото */
   display: block;
-  object-fit: cover;
 }
 
-/* --- АДАПТИВНОСТЬ (ТЕЛЕФОН) --- */
+/* --- АДАПТИВНОСТЬ (МОБИЛЬНЫЕ) --- */
+@media (max-width: 1024px) {
+  .intro-content {
+    /* На планшетах можно оставить две колонки, но уже 1fr 1fr */
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  
+  .calligraphy-small {
+    font-size: 2rem;
+  }
+}
+
 @media (max-width: 768px) {
   .intro-content {
-    /* На телефоне делаем одну колонку */
-    grid-template-columns: 1fr; 
-    gap: 40px;
-    text-align: center; /* Текст по центру на мобильном */
-    align-items: flex-start; /* Выравниваем по верху, чтобы не было пустот */
+    /* На телефоне — одна колонка друг под другом */
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: auto;
+    padding: 40px 0;
+  }
+
+  .intro-text {
+    padding-right: 0;
+    margin-bottom: 40px;
   }
 
   .calligraphy-small {
     font-size: 2rem;
   }
 
-  /* Чуть выше арка на мобильном, чтобы не задеть головы */
+  /* На мобильном арка чуть выше, чтобы не резать лица */
   .intro-image-wrapper {
-    margin-top: 30px;
     border-radius: 50% 50% 0 0 / 45% 45% 0 0;
   }
-}
-
-/* --- ОСТАЛЬНЫЕ СТИЛИ (ПРОГРАММА, КНОПКИ И Т.Д.) --- */
-section {
-  margin-bottom: 60px;
-}
-
-h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 400;
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 24px;
-  color: #1a1a1a;
-}
-
-.rsvp form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.rsvp input, .rsvp button {
-  padding: 14px;
-  border: none;
-  font-family: inherit;
-  font-size: 1rem;
-  border-radius: 4px;
-}
-
-.rsvp input {
-  border: 1px solid #ddd;
-  background: #fff;
-  color: #1a1a1a;
-}
-
-.rsvp button {
-  background: #1a1a1a;
-  color: #fff;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.rsvp button:hover {
-  background: #333;
 }
