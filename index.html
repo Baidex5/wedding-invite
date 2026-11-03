@@ -288,29 +288,38 @@
 
   <main class="container">
 
-    <!-- ТЕКСТ + ФОТО-АРКА (ТОЧНО КАК НА ТВОЕМ СКРИНШОТЕ) -->
-    <section class="intro">
-      <div class="intro-content">
-        <div class="intro-text">
-          <p class="calligraphy-small">Я люблю тебя<br>больше чем<br>вчера</p>
-          <p class="intro-message">
-            Это официальное приглашение на нашу свадьбу!<br>
-            А получили вы его потому, что мы очень хотим видеть вас в этот день рядом с нами :)
-          </p>
-        </div>
-
-        <div class="photo-card">
-          <!-- ЗАМЕНИ 'assets/arch-photo.jpg' НА ПУТЬ К ТВОЕМУ ФОТО -->
-          <img src="assets/arch-photo.jpg" alt="Пара в арке" class="arch-image" loading="lazy">
-        </div>
-      </div>
-    </section>
+   <div class="container">
+  <section class="intro">
     
- <!-- КНОПКА МУЗЫКИ (скрыта на мобильных, видна на ПК) -->
-      <button id="music-toggle" class="music-btn" title="Включить музыку">
-        <span class="icon">🎵</span>
-        <span class="text">Музыка</span>
-      </button>
+    <!-- Кнопка звука (справа вверху) -->
+    <button id="music-toggle" class="music-btn-top" title="Включить музыку">
+      <span class="icon">🎵</span>
+    </button>
+
+    <div class="intro-content">
+      <!-- Твой текст слева -->
+      <div class="intro-text">
+        <p class="calligraphy-small animate-in" style="animation-delay: 0.2s;">Я люблю тебя<br>больше чем<br>вчера</p>
+        <p class="intro-message animate-in" style="animation-delay: 0.4s;">
+          Это официальное приглашение на нашу свадьбу!<br>
+          А получили вы его потому, что мы очень хотим видеть вас в этот день рядом с нами :)
+        </p>
+      </div>
+
+      <!-- Твое фото справа -->
+      <div class="intro-image-wrapper animate-in" style="animation-delay: 0.6s;">
+        <img src="assets/arch-photo.jpg" alt="Пара" class="intro-image">
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<!-- Аудио файл (в конце body) -->
+<audio id="wedding-music" loop>
+  <source src="music/your-track.mp3" type="audio/mpeg">
+</audio>
+
 
     </div>
   </section>
