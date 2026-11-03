@@ -2,31 +2,33 @@ document.getElementById('rsvp-form')?.addEventListener('submit', (e) => {
   e.preventDefault();
   alert('Спасибо! Ваше подтверждение получено.');
   e.target.reset();
-  <script>
+ <script>
   const musicBtn = document.getElementById('music-toggle');
   const audio = document.getElementById('wedding-music');
   const icon = musicBtn.querySelector('.icon');
-  const text = musicBtn.querySelector('.text');
+
+  // Изначальное состояние: кнопка неактивна (пульсирует)
+  musicBtn.classList.add('inactive');
 
   musicBtn.addEventListener('click', () => {
     const isPlaying = !audio.paused;
 
     if (isPlaying) {
-      // Если играет -> ставим на паузу
+      // Музыка играет -> ставим на паузу
       audio.pause();
       musicBtn.classList.remove('active');
-      text.textContent = 'Музыка';
+      musicBtn.classList.add('inactive');
       icon.textContent = '🎵';
     } else {
-      // Если пауза -> пробуем запустить
+      // Музыка на паузе -> пробуем запустить
       audio.play().catch(error => {
-        console.log('Автовоспроизведение заблокировано браузером. Нужно взаимодействие пользователя.');
-        alert('Пожалуйста, нажмите на кнопку еще раз, чтобы включить музыку.');
+        console.log('Автовоспроизведение заблокировано браузером.');
+        // Можно добавить легкий алерт или просто оставить как есть
       });
       
       musicBtn.classList.add('active');
-      text.textContent = 'Выключить';
-      icon.textContent = '🔇';
+      musicBtn.classList.remove('inactive');
+      icon.textContent = '🔇'; // Меняем иконку на "выключить"
     }
   });
 </script>
