@@ -8,7 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
   
   <style>
-    /* --- БАЗА --- */
     body {
       margin: 0;
       padding: 0;
@@ -24,7 +23,6 @@
       padding: 60px 20px;
     }
 
-    /* --- СЕТКА ДЛЯ ТЕКСТА И ФОТО --- */
     .intro-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -54,47 +52,28 @@
       margin: 0;
     }
 
-    /* --- ГЛАВНЫЙ БЛОК С АРКОЙ (ИСПРАВЛЕНО) --- */
-    .photo-wrapper {
+    /* Блок с фото и аркой */
+    .photo-card {
       position: relative;
       width: 100%;
-      /* Важно: не задаем высоту, она будет по фото */
-      overflow: hidden; 
-      border-radius: 0 0 24px 24px; /* Скругление только низа */
+      border-radius: 0 0 24px 24px;
       box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15);
       background: #fff;
+      overflow: hidden;
+      padding: 10px;
     }
 
-    .photo-wrapper img {
-      width: 100%;
-      height: auto;
-      display: block;
-      /* Фото целое, ничего не режем */
-    }
-
-    /* --- БЕЛАЯ АРКА (МАСКА) --- */
-    .arch-mask {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .arch-image {
       width: 100%;
       height: 100%;
-      background-color: #fff;
-      z-index: 10;
-      
-      /* Магия: вырезаем дырку в белом фоне */
-      /* circle at top = центр круга сверху по центру */
-      /* transparent 45% = прозрачная часть (дырка) до 45% высоты */
-      /* black 55% = белая часть начинается после дырки */
-      -webkit-mask-image: radial-gradient(circle at top, transparent 45%, black 55%);
-      mask-image: radial-gradient(circle at top, transparent 45%, black 55%);
-      
-      /* Чтобы края были гладкими */
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
+      display: block;
+      object-fit: cover;
+      /* Арка: M0 0 L0 100% L100% 100% L100% 0 - это границы прямоугольника */
+      /* Q50% 35% 0 0 - это сама дуга. 50% - центр, 35% - высота дуги. */
+      /* Высота 35% подобрана так, чтобы арка мягко накрывала верх, не срезая головы */
+      clip-path: path('M0 0 L0 100% L100% 100% L100% 0 Q50% 35% 0 0 Z');
     }
 
-    /* --- АДАПТИВНОСТЬ (ТЕЛЕФОН) --- */
     @media (max-width: 768px) {
       .intro-content {
         grid-template-columns: 1fr;
@@ -106,10 +85,13 @@
         font-size: 2rem;
       }
 
-      /* На телефоне делаем арку чуть больше, чтобы головы точно влезли */
-      .arch-mask {
-        -webkit-mask-image: radial-gradient(circle at top, transparent 50%, black 60%);
-        mask-image: radial-gradient(circle at top, transparent 50%, black 60%);
+      .photo-card {
+        margin-top: 20px;
+      }
+
+      /* На мобильном чуть увеличиваем высоту арки, чтобы точно влезли головы */
+      .arch-image {
+        clip-path: path('M0 0 L0 100% L100% 100% L100% 0 Q50% 40% 0 0 Z');
       }
     }
   </style>
@@ -117,7 +99,6 @@
 <body>
 
   <main class="container">
-    
     <section class="intro">
       <div class="intro-content">
         <div class="intro-text">
@@ -128,17 +109,12 @@
           </p>
         </div>
         
-        <!-- Блок с фото и маской -->
-        <div class="photo-wrapper">
-          <!-- Путь к фото: assets/arch-photo.jpg -->
-          <img src="assets/arch-photo.jpg" alt="Пара в арке" loading="lazy">
-          
-          <!-- Белая маска с вырезом -->
-          <div class="arch-mask"></div>
+        <div class="photo-card">
+          <!-- Убедись, что путь к фото верный -->
+          <img src="assets/arch-photo.jpg" alt="Пара" class="arch-image" loading="lazy">
         </div>
       </div>
     </section>
-
   </main>
 
 </body>
