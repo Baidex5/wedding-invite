@@ -6,16 +6,293 @@
   <title>Руслан & Алёна • Свадьба</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* --- СБРОС И БАЗА --- */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      color: #1a1a1a;
+      background-color: #ffffff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* --- HERO SECTION (СТАТИЧНАЯ СЕКЦИЯ С ИМЕНАМИ, БЕЗ ВИДЕО) --- */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      min-height: 100vh; /* Высота на весь экран */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background-color: #f9f9f9; /* Легкий серый фон вместо видео */
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      color: #1a1a1a;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .calligraphy {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: clamp(3rem, 10vw, 5rem);
+      line-height: 1.1;
+      margin: 0;
+      color: #1a1a1a;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    .divider {
+      width: 100px;
+      height: 1px;
+      background: #1a1a1a;
+      margin: 20px auto;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 0.8s;
+    }
+
+    .date {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      letter-spacing: 4px;
+      color: #1a1a1a;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards 1.2s;
+    }
+
+    /* --- ОСНОВНОЙ КОНТЕНТ --- */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    /* --- БЛОК ПРИГЛАШЕНИЯ (ТЕКСТ + АРКА) --- */
+    .intro-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* Две колонки: текст и фото */
+      gap: 80px;
+      align-items: center;
+    }
+
+    .intro-text {
+      text-align: left;
+    }
+
+    .calligraphy-small {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 3.5rem;
+      line-height: 1.1;
+      margin: 0 0 25px 0;
+      color: #1a1a1a;
+    }
+
+    .intro-message {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+    }
+
+    /* --- ФОРМА АРКИ (САМОЕ ВАЖНОЕ) --- */
+    .intro-image-wrapper {
+      position: relative;
+      width: 100%;
+      /* Квадратный блок для правильной формы арки */
+      padding-top: 100%; 
+      overflow: hidden;
+      /* Нижние углы чуть скруглены для эстетики */
+      border-radius: 0 0 20px 20px; 
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.2); /* Глубокая тень */
+      background: #fff; 
+    }
+
+    .arch-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      
+      /* ФОРМА АРКИ: Эллипс, обрезанный сверху */
+      /* 50% ширина, 55% высота, центр сверху по центру */
+      clip-path: ellipse(50% 55% at 50% 0%);
+      
+      object-fit: cover; /* Фото заполняет форму, не искажаясь */
+      display: block;
+    }
+
+    /* --- ДРУГИЕ СЕКЦИИ --- */
+    section {
+      margin-bottom: 80px;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #1a1a1a;
+      text-transform: none;
+      letter-spacing: 1px;
+    }
+
+    /* Программа дня */
+    .program ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .program li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 15px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+    }
+
+    .program span {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      min-width: 80px;
+      color: #1a1a1a;
+    }
+
+    /* Дресс-код и Локация */
+    .dress-code p,
+    .location p {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    /* Форма RSVP */
+    .rsvp form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 450px;
+      margin: 0 auto;
+    }
+
+    .rsvp input {
+      padding: 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: #fff;
+      color: #1a1a1a;
+      font-family: inherit;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .rsvp button {
+      padding: 16px;
+      border: none;
+      background: #1a1a1a;
+      color: #fff;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background 0.3s;
+    }
+
+    .rsvp button:hover {
+      background: #333;
+    }
+
+    /* --- АНИМАЦИИ --- */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeIn 1s forwards;
+    }
+
+    .delay-1 { animation-delay: 0.3s; }
+    .delay-2 { animation-delay: 0.6s; }
+    .delay-3 { animation-delay: 0.9s; }
+    .delay-4 { animation-delay: 1.2s; }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* --- АДАПТИВНОСТЬ (ТЕЛЕФОНЫ) --- */
+    @media (max-width: 768px) {
+      .hero-section {
+        min-height: 80vh;
+      }
+
+      .calligraphy {
+        font-size: 2.5rem;
+      }
+
+      .date {
+        font-size: 1.5rem;
+      }
+
+      .intro-content {
+        grid-template-columns: 1fr; /* Одна колонка */
+        text-align: center;
+        gap: 40px;
+      }
+
+      .calligraphy-small {
+        font-size: 2rem;
+      }
+
+      /* На телефоне арка чуть ниже, чтобы лица не обрезались */
+      .intro-image-wrapper {
+        padding-top: 70%; /* Более компактная арка */
+        margin-top: 30px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      }
+
+      .arch-image {
+        /* Чуть более круглая арка на мобильном */
+        clip-path: ellipse(50% 50% at 50% 0%);
+      }
+
+      .container {
+        padding: 40px 20px;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
+
+  <!-- ГЛАВНЫЙ ЭКРАН (СТАТИЧНЫЙ, БЕЗ ВИДЕО) -->
   <section class="hero-section">
-    <div class="video-wrapper">
-      <video autoplay muted loop playsinline class="video-bg">
-        <source src="assets/ring-video.mp4" type="video/mp4">
-      </video>
-      <div class="overlay"></div>
-    </div>
     <div class="hero-content">
       <h1 class="calligraphy">Руслан & Алёна</h1>
       <div class="divider"></div>
@@ -24,7 +301,8 @@
   </section>
 
   <main class="container">
-    <!-- Блок с текстом И фото арки -->
+    
+    <!-- БЛОК С ТЕКСТОМ И АРКОЙ -->
     <section class="intro fade-up">
       <div class="intro-content">
         <div class="intro-text">
@@ -34,13 +312,15 @@
             А получили вы его потому, что мы очень хотим видеть вас в этот день рядом с нами :)
           </p>
         </div>
-        <!-- Блок с фото арки -->
+        
         <div class="intro-image-wrapper">
-          <img src="assets/arch-photo.jpg" alt="Фото арки" class="intro-image" loading="lazy">
+          <!-- ВАЖНО: Путь к фото должен совпадать с реальным расположением файла -->
+          <img src="assets/arch-photo.jpg" alt="Фото пары в арке" class="arch-image" loading="lazy">
         </div>
       </div>
     </section>
 
+    <!-- ПРОГРАММА ДНЯ -->
     <section class="program fade-up delay-1">
       <h2>Программа дня</h2>
       <ul>
@@ -51,16 +331,19 @@
       </ul>
     </section>
 
+    <!-- ДРЕСС-КОД -->
     <section class="dress-code fade-up delay-2">
       <h2>Дресс‑код</h2>
       <p>Элегантный стиль (Cocktail). Пастельные и нейтральные тона приветствуются.</p>
     </section>
 
+    <!-- МЕСТО -->
     <section class="location fade-up delay-3">
       <h2>Место</h2>
       <p>Ресторан «Астория», зал «Золотой»<br>г. Москва, ул. Тверская, 1</p>
     </section>
 
+    <!-- RSVP -->
     <section class="rsvp fade-up delay-4">
       <h2>Подтвердите присутствие</h2>
       <form id="rsvp-form">
@@ -69,9 +352,15 @@
         <button type="submit">Отправить</button>
       </form>
     </section>
+
   </main>
 
-  <script src="script.js"></script>
+  <script>
+    // Простой скрипт для отправки формы (заглушка)
+    document.getElementById('rsvp-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Спасибо! Ваше подтверждение получено.');
+    });
+  </script>
 </body>
 </html>
-
