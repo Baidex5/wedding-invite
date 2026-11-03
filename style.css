@@ -68,29 +68,19 @@ body {
 .intro-image-wrapper {
   position: relative;
   width: 100%;
-  /* Квадратный контейнер (padding-top = 100%) */
-  padding-top: 100%;
+  /* УБРАЛИ padding-top: 100% — теперь высота по фото, ничего не сплющится */
   overflow: hidden;
-  /* Нижние углы чуть скругляем для эстетики */
   border-radius: 0 0 16px 16px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .intro-image {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  
-  .arch-image {
-  /* ... остальные свойства ... */
-  clip-path: ellipse(50% 55% at 50% 0%);
-}
-
-  
-  object-fit: cover;
+  height: auto;
   display: block;
+  object-fit: cover;
+  /* Арка: эллипс, который закрывает верх, но не трогает лица */
+  clip-path: ellipse(50% 55% at 50% 0%);
 }
 /* ---------------------------------- */
 
